@@ -1,5 +1,4 @@
 import main as m
-# from main import User
 
 URL = m.TEST_URL
 
@@ -14,18 +13,19 @@ def test_create_user():
     payload = m.user_payload()
     response = m.create_user(payload)
     assert response.status_code == 200
-    id = response.json()["id"]
-    # print(id)
+    data = response.json()["id"]
+    print(data)
 
-    return id
-
-
-ret = test_create_user()
+    return data
 
 
-def test_get_user_by_id(ret):
+def test_get_user_by_id():
     # Get User by User ID
-    payload = m.get_user_by_id()
-    response = m.get_user_by_id()
+    # API can respond only user ID from 1 to 10
+    u = test_create_user()
+    response = m.get_user_by_id(u)
     assert response.status_code == 200
 
+
+def test_update_user_by_id():
+    pass

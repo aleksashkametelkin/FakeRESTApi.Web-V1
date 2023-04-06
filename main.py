@@ -2,7 +2,6 @@ import random
 
 import requests
 from faker import Faker
-from dataclasses import dataclass
 
 
 f = Faker()
@@ -140,7 +139,7 @@ def cover_photo_payload():
 
 # Users
 def get_list_of_users():
-    return requests.get(TEST_URL + f"/api/v1/Activities")
+    return requests.get(TEST_URL + f"/api/v1/Users")
 
 
 def create_user(user_id):
@@ -148,27 +147,23 @@ def create_user(user_id):
 
 
 def get_user_by_id(user):
-    return requests.get(TEST_URL + f"/api/v1/Activities/{user}")
+    return requests.get(TEST_URL + f"/api/v1/Users/{user}")
 
 
 def update_user(user):
-    return requests.put(TEST_URL + f"/api/v1/Activities/{user}")
+    return requests.put(TEST_URL + f"/api/v1/Users/{user}")
 
 
 def delete_user(user):
-    return requests.put(TEST_URL + f"/api/v1/Activities/{user}")
+    return requests.put(TEST_URL + f"/api/v1/Users/{user}")
 
 
 def user_payload():
-    user_id = random.randrange(1, 10000)
+    # API can respond only user ID from 1 to 10
+    user_id = random.randrange(1, 10)
     return {
         "id": user_id,
         "userName": f"{f.name()}",
         "password": f"{f.password()}"
     }
 
-
-@dataclass
-class User:
-    id: int
-    name: str
