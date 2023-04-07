@@ -6,10 +6,21 @@ import requests
 from faker import Faker
 
 
-class User(BaseModel):
+class BaseClass(BaseModel):
+    # User
     id: Optional[int] = None
     name: Optional[str] = None
     password: Optional[str]
+    # Activity
+    title: Optional[str]
+    dueDate: Optional[str]
+    completed: Optional[bool]
+    # Author
+    idBook: Optional[int]
+    firstName: Optional[str]
+    lastName: Optional[str]
+    # Book
+    # CoverPhotos
 
 
 f = Faker()
@@ -21,28 +32,29 @@ def get_list_of_activities():
     return requests.get(TEST_URL + f"/api/v1/Activities")
 
 
-def create_activity(activity):
-    return requests.post(TEST_URL + f"/api/v1/Activities", params=activity)
+def create_activity(activity_id):
+    return requests.post(TEST_URL + f"/api/v1/Activities/{activity_id}", json=activity_id)
 
 
-def get_activity(activity):
-    return requests.get(TEST_URL + f"/api/v1/Activities", params=activity)
+def get_activity(activity_id):
+    return requests.get(TEST_URL + f"/api/v1/Activities/{activity_id}")
 
 
-def update_activity(activity):
-    return requests.put(TEST_URL + f"/api/v1/Activities", params=activity)
+def update_activity(activity_id):
+    return requests.put(TEST_URL + f"/api/v1/Activities/{BaseClass.id}", json=activity_id)
 
 
-def delete_activity(activity):
-    return requests.put(TEST_URL + f"/api/v1/Activities", params=activity)
+def delete_activity(activity_id):
+    return requests.delete(TEST_URL + f"/api/v1/Activities/{activity_id}")
 
 
-def author_payload():
+def activity_payload():
+    activity_id = random.randrange(1, 200)
     return {
-        "id": 64577354,
-        "title": "string",
-        "dueDate": "2023-04-05T17:36:23.298Z",
-        "completed": False
+        "id": activity_id,
+        "title": f"{f.job()}",
+        "dueDate": f"2023-04-07T16:22:19.253Z",
+        "completed": True,
     }
 
 
@@ -52,19 +64,19 @@ def get_list_of_authors():
 
 
 def create_author(author):
-    return requests.post(TEST_URL + f"/api/v1/Authors", params=author)
+    return requests.post(TEST_URL + f"/api/v1/Authors", json=author)
 
 
-def get_book_of_author(author):
-    return requests.get(TEST_URL + f"/api/v1/Authors", params=author)
+def get_book_of_author():
+    return requests.get(TEST_URL + f"/api/v1/Authors/authors/books/{BaseClass.id}")
 
 
 def get_author_by_id(book):
-    return requests.get(TEST_URL + f"/api/v1/Authors/authors/books/", params=book)
+    return requests.get(TEST_URL + f"/api/v1/Authors/{BaseClass.id}")
 
 
 def update_author(author):
-    return requests.put(TEST_URL + f"/api/v1/Authors", params=author)
+    return requests.put(TEST_URL + f"/api/v1/Authors/{BaseClass.id}", json=author)
 
 
 def delete_author(author):
@@ -72,11 +84,13 @@ def delete_author(author):
 
 
 def author_payload():
+    author_id = random.randrange(1, 200)
+    book_id = random.randrange(1, 200)
     return {
-        "id": 0,
-        "idBook": 0,
-        "firstName": "string",
-        "lastName": "string"
+        "id": author_id,
+        "idBook": book_id,
+        "firstName": f"{f.first_name()}",
+        "lastName": f"{f.last_name()}"
     }
 
 
@@ -159,11 +173,11 @@ def get_user_by_id(user_id):
 
 
 def update_user(user_id):
-    return requests.put(TEST_URL + f"/api/v1/Users/{User.id}", json=user_id)
+    return requests.put(TEST_URL + f"/api/v1/Users/{BaseClass.id}", json=user_id)
 
 
-def delete_user(user_id):
-    return requests.delete(TEST_URL + f"/api/v1/Users/{user_id}")
+def delete_user():
+    return requests.delete(TEST_URL + f"/api/v1/Users/{BaseClass.id}")
 
 
 def user_payload():

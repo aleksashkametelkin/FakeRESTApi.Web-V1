@@ -1,7 +1,7 @@
 import pytest
-from main import User
+from main import BaseClass
 
 
 @pytest.fixture
 def user():
-    return User()
+    return BaseClass()
