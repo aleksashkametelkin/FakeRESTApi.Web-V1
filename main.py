@@ -1,3 +1,5 @@
+from pydantic import BaseModel
+from typing import Optional
 import random
 
 import requests
@@ -146,8 +148,8 @@ def create_user(user_id):
     return requests.post(TEST_URL + f"/api/v1/Users", json=user_id)
 
 
-def get_user_by_id(user):
-    return requests.get(TEST_URL + f"/api/v1/Users/{user}")
+def get_user_by_id(user_id):
+    return requests.get(TEST_URL + f"/api/v1/Users/{user_id}")
 
 
 def update_user(user):
@@ -167,3 +169,7 @@ def user_payload():
         "password": f"{f.password()}"
     }
 
+
+class User(BaseModel):
+    id: Optional[int] = None
+    name: Optional[str] = None
