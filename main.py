@@ -162,8 +162,8 @@ def update_user(user_id):
     return requests.put(TEST_URL + f"/api/v1/Users/{User.id}", json=user_id)
 
 
-def delete_user(user):
-    return requests.put(TEST_URL + f"/api/v1/Users/{user}")
+def delete_user(user_id):
+    return requests.delete(TEST_URL + f"/api/v1/Users/{user_id}")
 
 
 def user_payload():
