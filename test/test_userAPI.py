@@ -25,5 +25,14 @@ def test_get_user_by_id(user: User):
     assert response.status_code == 200
 
 
-def test_update_user_by_id():
-    pass
+def test_update_user_by_id(user: User):
+    # Update User's params
+    payload = m.user_payload()
+    print(payload)
+    response = m.update_user(payload)
+    print(response)
+    assert response.status_code == 200
+
+    User.id = response.json()["id"]
+
+

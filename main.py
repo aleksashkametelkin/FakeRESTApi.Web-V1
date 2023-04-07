@@ -6,6 +6,12 @@ import requests
 from faker import Faker
 
 
+class User(BaseModel):
+    id: Optional[int] = None
+    name: Optional[str] = None
+    password: Optional[str]
+
+
 f = Faker()
 TEST_URL = "https://fakerestapi.azurewebsites.net"
 
@@ -152,8 +158,8 @@ def get_user_by_id(user_id):
     return requests.get(TEST_URL + f"/api/v1/Users/{user_id}")
 
 
-def update_user(user):
-    return requests.put(TEST_URL + f"/api/v1/Users/{user}")
+def update_user(user_id):
+    return requests.put(TEST_URL + f"/api/v1/Users/{User.id}", json=user_id)
 
 
 def delete_user(user):
@@ -161,15 +167,10 @@ def delete_user(user):
 
 
 def user_payload():
-    # API can respond only user ID from 1 to 10
+    # API can respond only Integer user ID: from 1 to 10
     user_id = random.randrange(1, 10)
     return {
         "id": user_id,
         "userName": f"{f.name()}",
         "password": f"{f.password()}"
     }
-
-
-class User(BaseModel):
-    id: Optional[int] = None
-    name: Optional[str] = None
