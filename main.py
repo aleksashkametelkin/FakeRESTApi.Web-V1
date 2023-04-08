@@ -1,3 +1,5 @@
+import datetime
+from datetime import datetime
 import random
 
 import requests
@@ -52,7 +54,7 @@ def get_book_of_author():
     return requests.get(TEST_URL + f"/api/v1/Authors/authors/books/{BaseClass.id}")
 
 
-def get_author_by_id(book):
+def get_author_by_id():
     return requests.get(TEST_URL + f"/api/v1/Authors/{BaseClass.id}")
 
 
@@ -60,8 +62,8 @@ def update_author(author):
     return requests.put(TEST_URL + f"/api/v1/Authors/{BaseClass.id}", json=author)
 
 
-def delete_author(author):
-    return requests.put(TEST_URL + f"/api/v1/Authors", params=author)
+def delete_author():
+    return requests.put(TEST_URL + f"/api/v1/Authors/{BaseClass.id}")
 
 
 def author_payload():
@@ -77,31 +79,36 @@ def author_payload():
 
 # Books
 def get_list_of_books():
-    return requests.get(TEST_URL + f"/api/v1/Activities")
+    return requests.get(TEST_URL + f"/api/v1/Books")
 
 
 def create_book(activity):
-    return requests.post(TEST_URL + f"/api/v1/Activities", json=activity)
+    return requests.post(TEST_URL + f"/api/v1/Books", json=activity)
 
 
 def get_book_by_id():
-    return requests.get(TEST_URL + f"/api/v1/Activities{BaseClass.id}")
+    return requests.get(TEST_URL + f"/api/v1/Books/{BaseClass.id}")
 
 
 def update_book(activity):
-    return requests.put(TEST_URL + f"/api/v1/Activities", json=activity)
+    return requests.put(TEST_URL + f"/api/v1/Books/{BaseClass.id}", json=activity)
 
 
-def delete_book(activity):
-    return requests.put(TEST_URL + f"/api/v1/Activities", params=activity)
+def delete_book():
+    return requests.delete(TEST_URL + f"/api/v1/Books/{BaseClass.id}")
 
 
 def book_payload():
+    # date_now = datetime.date.today()
+    # time_now = datetime.time.
+    book_id = random.randrange(1, 10)
+    page_count = random.randrange(100, 2000)
+
     return {
-        "id": 0,
-        "title": "string",
-        "description": "string",
-        "pageCount": 0,
+        "id": book_id,
+        "title": f"{f.name()}",
+        "description": f"{f.job()}",
+        "pageCount": page_count,
         "excerpt": "string",
         "publishDate": "2023-04-05T22:44:04.097Z"
     }
