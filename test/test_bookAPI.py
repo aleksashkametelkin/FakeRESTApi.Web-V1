@@ -1,5 +1,5 @@
 import main as m
-from utils.models import BaseClass
+from utils.models import Book
 
 URL = m.TEST_URL
 
@@ -9,13 +9,13 @@ def test_get_list_of_books():
     assert response.status_code == 200
 
 
-def test_create_book(user: BaseClass):
+def test_create_book(user: Book):
     # Create POST response to create new User
     payload = m.book_payload()
     response = m.create_book(payload)
     assert response.status_code == 200
 
-    BaseClass.id = response.json()["id"]
+    Book.id = response.json()["id"]
 
 
 def test_get_book_by_id():
@@ -25,15 +25,15 @@ def test_get_book_by_id():
     assert response.status_code == 200
 
 
-def test_update_book_by_id(user: BaseClass):
+def test_update_book_by_id(user: Book):
     # Update User's params
     payload = m.book_payload()
     response = m.update_book(payload)
     assert response.status_code == 200
     book_id_new = response.json()["id"]
 
-    assert BaseClass.id != book_id_new
-    BaseClass.id = response.json()["id"]
+    assert Book.id != book_id_new
+    Book.id = response.json()["id"]
 
 
 def test_delete_book():

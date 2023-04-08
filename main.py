@@ -4,7 +4,7 @@ import random
 
 import requests
 from faker import Faker
-from utils.models import BaseClass
+from utils.models import BaseClass, Book
 
 f = Faker()
 TEST_URL = "https://fakerestapi.azurewebsites.net"
@@ -87,15 +87,15 @@ def create_book(activity):
 
 
 def get_book_by_id():
-    return requests.get(TEST_URL + f"/api/v1/Books/{BaseClass.id}")
+    return requests.get(TEST_URL + f"/api/v1/Books/{Book.id}")
 
 
 def update_book(activity):
-    return requests.put(TEST_URL + f"/api/v1/Books/{BaseClass.id}", json=activity)
+    return requests.put(TEST_URL + f"/api/v1/Books/{Book.id}", json=activity)
 
 
 def delete_book():
-    return requests.delete(TEST_URL + f"/api/v1/Books/{BaseClass.id}")
+    return requests.delete(TEST_URL + f"/api/v1/Books/{Book.id}")
 
 
 def book_payload():
@@ -116,33 +116,34 @@ def book_payload():
 
 # CoverPhotos
 def get_list_of_cover_photos():
-    return requests.get(TEST_URL + f"/api/v1/Authors")
+    return requests.get(TEST_URL + f"/api/v1/CoverPhotos")
 
 
-def create_cover_photo(author):
-    return requests.post(TEST_URL + f"/api/v1/Authors", params=author)
+def create_cover_photo(cover_photo):
+    return requests.post(TEST_URL + f"/api/v1/CoverPhotos", json=cover_photo)
 
 
-def get_book_by_cover_photo():
-    return requests.get(TEST_URL + f"/api/v1/Authors{BaseClass.id}")
+def get_cover_photo_by_book_id():
+    return requests.get(TEST_URL + f"/api/v1/CoverPhotos/books/covers/{Book.id}")
 
 
 def get_cover_photo_by_id():
-    return requests.get(TEST_URL + f"/api/v1/Authors/authors/books/{BaseClass}")
+    return requests.get(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}")
 
 
-def update_cover_photo(author):
-    return requests.put(TEST_URL + f"/api/v1/Authors", params=author)
+def update_cover_photo(cover_photo):
+    return requests.put(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}", json=cover_photo)
 
 
-def delete_cover_photo(author):
-    return requests.put(TEST_URL + f"/api/v1/Authors", params=author)
+def delete_cover_photo(cover_photo):
+    return requests.put(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}", json=cover_photo)
 
 
 def cover_photo_payload():
+    cover_photo_id = random.randrange(1, 10)
     return {
-        "id": 0,
-        "idBook": 0,
+        "id": cover_photo_id,
+        "idBook": Book.id,
         "url": "string"
     }
 

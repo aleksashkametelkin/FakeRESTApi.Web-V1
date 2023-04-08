@@ -15,10 +15,15 @@ class BaseClass(BaseModel):
     idBook: Optional[int]
     firstName: Optional[str]
     lastName: Optional[str]
+    # CoverPhotos
+    url: Optional[str]
+
+
+class Book(BaseModel):
     # Book
+    id: Optional[int]
+    title: Optional[str]
     description: Optional[str]
     pageCount: Optional[int]
     excerpt: Optional[str]
     publishDate: Optional[str]
-    # CoverPhotos
-    url: Optional[str]
