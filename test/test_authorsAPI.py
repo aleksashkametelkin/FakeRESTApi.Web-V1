@@ -18,20 +18,18 @@ def test_create_author(user: BaseClass):
     BaseClass.id = response.json()["id"]
 
 
-# def test_get_book_by_author_id():
-#     # Get Author by Author ID
-#     # API can respond only user ID from 1 to 10
-#     response = m.get_book_of_author()
-#     assert response.status_code == 200
-#     pass
+def test_get_book_by_author_id():
+    # Get Author by Author ID
+    # API can respond only user ID from 1 to 10
+    response = m.get_book_of_author()
+    assert response.status_code == 200
 
 
 def test_get_author_id():
     # Get Author by Author ID
     # API can respond only user ID from 1 to 10
-    # response = m.get_author_by_id(Book.id)
-    # assert response.status_code == 200
-    pass
+    response = m.get_author_by_id()
+    assert response.status_code == 200
 
 
 def test_update_author_by_id(user: BaseClass):
