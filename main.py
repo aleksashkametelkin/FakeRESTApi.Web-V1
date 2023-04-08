@@ -1,27 +1,8 @@
-from pydantic import BaseModel
-from typing import Optional
 import random
 
 import requests
 from faker import Faker
-
-
-class BaseClass(BaseModel):
-    # User
-    id: Optional[int] = None
-    name: Optional[str] = None
-    password: Optional[str]
-    # Activity
-    title: Optional[str]
-    dueDate: Optional[str]
-    completed: Optional[bool]
-    # Author
-    idBook: Optional[int]
-    firstName: Optional[str]
-    lastName: Optional[str]
-    # Book
-    # CoverPhotos
-
+from utils.models import BaseClass
 
 f = Faker()
 TEST_URL = "https://fakerestapi.azurewebsites.net"
@@ -36,8 +17,8 @@ def create_activity(activity_id):
     return requests.post(TEST_URL + f"/api/v1/Activities/{activity_id}", json=activity_id)
 
 
-def get_activity(activity_id):
-    return requests.get(TEST_URL + f"/api/v1/Activities/{activity_id}")
+def get_activity():
+    return requests.get(TEST_URL + f"/api/v1/Activities/{BaseClass.id}")
 
 
 def update_activity(activity_id):
@@ -100,15 +81,15 @@ def get_list_of_books():
 
 
 def create_book(activity):
-    return requests.post(TEST_URL + f"/api/v1/Activities", params=activity)
+    return requests.post(TEST_URL + f"/api/v1/Activities", json=activity)
 
 
-def get_book_by_id(activity):
-    return requests.get(TEST_URL + f"/api/v1/Activities", params=activity)
+def get_book_by_id():
+    return requests.get(TEST_URL + f"/api/v1/Activities{BaseClass.id}")
 
 
 def update_book(activity):
-    return requests.put(TEST_URL + f"/api/v1/Activities", params=activity)
+    return requests.put(TEST_URL + f"/api/v1/Activities", json=activity)
 
 
 def delete_book(activity):
@@ -135,12 +116,12 @@ def create_cover_photo(author):
     return requests.post(TEST_URL + f"/api/v1/Authors", params=author)
 
 
-def get_book_by_cover_photo(author):
-    return requests.get(TEST_URL + f"/api/v1/Authors", params=author)
+def get_book_by_cover_photo():
+    return requests.get(TEST_URL + f"/api/v1/Authors{BaseClass.id}")
 
 
-def get_cover_photo_by_id(book):
-    return requests.get(TEST_URL + f"/api/v1/Authors/authors/books/", params=book)
+def get_cover_photo_by_id():
+    return requests.get(TEST_URL + f"/api/v1/Authors/authors/books/{BaseClass}")
 
 
 def update_cover_photo(author):
@@ -168,8 +149,8 @@ def create_user(user_id):
     return requests.post(TEST_URL + f"/api/v1/Users", json=user_id)
 
 
-def get_user_by_id(user_id):
-    return requests.get(TEST_URL + f"/api/v1/Users/{user_id}")
+def get_user_by_id():
+    return requests.get(TEST_URL + f"/api/v1/Users/{BaseClass.id}")
 
 
 def update_user(user_id):

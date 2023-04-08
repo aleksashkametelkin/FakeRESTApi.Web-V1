@@ -1,5 +1,5 @@
 import main as m
-from main import BaseClass
+from utils.models import BaseClass
 
 URL = m.TEST_URL
 
@@ -21,7 +21,7 @@ def test_create_user(user: BaseClass):
 def test_get_user_by_id():
     # Get User by User ID
     # API can respond only user ID from 1 to 10
-    response = m.get_user_by_id(BaseClass.id)
+    response = m.get_user_by_id()
     assert response.status_code == 200
 
 
@@ -37,5 +37,5 @@ def test_update_user_by_id(user: BaseClass):
 
 
 def test_delete_user():
-    response = m.get_user_by_id(BaseClass.id)
+    response = m.get_user_by_id()
     assert response.status_code == 200

@@ -1,5 +1,5 @@
 import main as m
-from main import BaseClass
+from utils.models import BaseClass
 
 URL = m.TEST_URL
 
@@ -37,12 +37,9 @@ def test_get_author_id():
 def test_update_author_by_id(user: BaseClass):
     # Update User's params
     payload = m.author_payload()
-    print(payload)
     response = m.update_author(payload)
-    print(response)
     assert response.status_code == 200
     author_id_new = response.json()["id"]
-    print(author_id_new)
 
     assert BaseClass.id != author_id_new
     BaseClass.id = response.json()["id"]

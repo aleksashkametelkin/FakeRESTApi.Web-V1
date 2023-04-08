@@ -1,5 +1,5 @@
 import main as m
-from main import BaseClass
+from utils.models import BaseClass
 
 URL = m.TEST_URL
 
@@ -21,7 +21,7 @@ def test_create_activity(user: BaseClass):
 def test_get_activity_id():
     # Get Activity by ID
     # API can respond only Activity ID from 1 to 10
-    response = m.get_user_by_id(BaseClass.id)
+    response = m.get_user_by_id()
     assert response.status_code == 200
 
 
