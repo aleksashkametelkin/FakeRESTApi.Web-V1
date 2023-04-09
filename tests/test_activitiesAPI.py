@@ -1,3 +1,5 @@
+import json
+import random
 import main as m
 from utils.models import BaseClass
 
@@ -7,29 +9,44 @@ URL = m.TEST_URL
 
 
 def test_get_list_of_activities():
-    response = m.get_list_of_users()
+    response = m.get_list_of_activities()
     assert response.status_code == 200
+
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'get_list_of_activities.json')
 
 
 def test_create_activity(user: BaseClass):
     # Create POST response to create new Activity
-    payload = m.user_payload()
-    response = m.create_user(payload)
+    payload = m.activity_payload()
+    response = m.create_activity(payload)
     assert response.status_code == 200
 
     BaseClass.id = response.json()["id"]
+
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'activity.json')
 
 
 def test_get_activity_id():
     # Get Activity by ID
     # API can respond only Activity ID from 1 to 10
-    response = m.get_user_by_id()
+    response = m.get_activity()
     assert response.status_code == 200
+
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'activity.json')
 
 
 def test_update_activity_by_id(user: BaseClass):
     # Update Activity's params
-    payload = m.activity_payload()
+    activity_id = random.randrange(100, 1000)
+    payload = {
+        "activity_id": activity_id,
+        "title": "test title",
+        "dueDate": "2023-04-09T09:39:20.165Z",
+        "completed": True
+    }
     response = m.update_activity(payload)
     assert response.status_code == 200
     activiti_id_new = response.json()["id"]
@@ -37,13 +54,11 @@ def test_update_activity_by_id(user: BaseClass):
     assert BaseClass.id != activiti_id_new
     BaseClass.id = response.json()["id"]
 
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'activity.json')
+
 
 def test_delete_activity_by_id():
     # Delete existing activity
-    payload = m.activity_payload()
-    response = m.update_activity(payload)
+    response = m.delete_activity()
     assert response.status_code == 200
-    activity_id_new = response.json()["id"]
-
-    assert BaseClass.id != activity_id_new
-    BaseClass.id = response.json()["id"]

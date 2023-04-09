@@ -16,7 +16,7 @@ def get_list_of_activities():
 
 
 def create_activity(activity_id):
-    return requests.post(TEST_URL + f"/api/v1/Activities/{activity_id}", json=activity_id)
+    return requests.post(TEST_URL + f"/api/v1/Activities", json=activity_id)
 
 
 def get_activity():
@@ -27,12 +27,12 @@ def update_activity(activity_id):
     return requests.put(TEST_URL + f"/api/v1/Activities/{BaseClass.id}", json=activity_id)
 
 
-def delete_activity(activity_id):
-    return requests.delete(TEST_URL + f"/api/v1/Activities/{activity_id}")
+def delete_activity():
+    return requests.delete(TEST_URL + f"/api/v1/Activities/{BaseClass.id}")
 
 
 def activity_payload():
-    activity_id = random.randrange(1, 200)
+    activity_id = random.randrange(1, 10)
     return {
         "id": activity_id,
         "title": f"{f.job()}",
@@ -63,7 +63,7 @@ def update_author(author):
 
 
 def delete_author():
-    return requests.put(TEST_URL + f"/api/v1/Authors/{BaseClass.id}")
+    return requests.delete(TEST_URL + f"/api/v1/Authors/{BaseClass.id}")
 
 
 def author_payload():

@@ -1,8 +1,9 @@
 import json
-import main as m
-from utils.models import BaseClass
+import random
 
+import main as m
 from tests.support.assertions import assert_valid_schema
+from utils.models import BaseClass
 
 URL = m.TEST_URL
 
@@ -48,8 +49,14 @@ def test_get_author_id():
 
 
 def test_update_author_by_id(user: BaseClass):
-    # Update User's params
-    payload = m.author_payload()
+    # Update Author's params
+    author_id = random.randrange(1, 200)
+    payload = {
+        "id": author_id,
+        "idBook": user.idBook,
+        "firstName": f"{user.firstName}",
+        "lastName": f"{user.lastName}"
+    }
     response = m.update_author(payload)
     assert response.status_code == 200
     author_id_new = response.json()["id"]
@@ -63,10 +70,5 @@ def test_update_author_by_id(user: BaseClass):
 
 def test_delete_author_by_id():
     # Delete existing activity
-    payload = m.author_payload()
-    response = m.update_author(payload)
+    response = m.delete_author()
     assert response.status_code == 200
-    author_id_new = response.json()["id"]
-
-    assert BaseClass.id != author_id_new
-    BaseClass.id = response.json()["id"]
