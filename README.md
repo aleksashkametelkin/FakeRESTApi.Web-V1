@@ -1,2 +1,2 @@
 # imgur
-Python + Pytest + Allure
+Python + Pytest + TelegramBot report

@@ -3,3 +3,4 @@ requests~=2.26.0
 Faker==18.3.2
 pydantic==1.10.7
 jsonschema==4.17.3
+pytest-telegram==1.2.0
