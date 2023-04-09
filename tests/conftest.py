@@ -1,5 +1,5 @@
 import pytest
-from main import BaseClass
+from utils.models import BaseClass
 
 
 @pytest.fixture
