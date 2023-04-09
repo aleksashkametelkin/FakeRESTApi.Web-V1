@@ -1,3 +1,4 @@
+import json
 import main as m
 from utils.models import BaseClass
 
@@ -10,6 +11,9 @@ def test_get_list_of_authors():
     response = m.get_list_of_authors()
     assert response.status_code == 200
 
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'get_list_of_authors.json')
+
 
 def test_create_author(user: BaseClass):
     # Create POST response to create new User
@@ -19,6 +23,9 @@ def test_create_author(user: BaseClass):
 
     BaseClass.id = response.json()["id"]
 
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'author.json')
+
 
 def test_get_book_by_author_id():
     # Get Author by Author ID
@@ -26,12 +33,18 @@ def test_get_book_by_author_id():
     response = m.get_book_of_author()
     assert response.status_code == 200
 
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'book.json')
+
 
 def test_get_author_id():
     # Get Author by Author ID
-    # API can respond only user ID from 1 to 10
+    # API can respond only Author ID from 1 to 10
     response = m.get_author_by_id()
     assert response.status_code == 200
+
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'author.json')
 
 
 def test_update_author_by_id(user: BaseClass):
@@ -43,6 +56,9 @@ def test_update_author_by_id(user: BaseClass):
 
     assert BaseClass.id != author_id_new
     BaseClass.id = response.json()["id"]
+
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'author.json')
 
 
 def test_delete_author_by_id():

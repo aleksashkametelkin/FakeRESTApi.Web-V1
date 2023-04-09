@@ -1,6 +1,8 @@
 import main as m
 from utils.models import BaseClass
 
+from tests.support.assertions import assert_valid_schema
+
 URL = m.TEST_URL
 
 
