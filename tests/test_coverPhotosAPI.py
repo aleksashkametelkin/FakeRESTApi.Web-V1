@@ -1,3 +1,4 @@
+import json
 import main as m
 from utils.models import BaseClass
 
@@ -10,6 +11,9 @@ def test_get_list_of_cover_photos():
     response = m.get_list_of_cover_photos()
     assert response.status_code == 200
 
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'get_list_of_cover_photos.json')
+
 
 def test_create_cover_photo(user: BaseClass):
     # Create POST response to create new User
@@ -19,6 +23,9 @@ def test_create_cover_photo(user: BaseClass):
 
     BaseClass.id = response.json()["id"]
 
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'cover_photo.json')
+
 
 def test_get_cover_photo_by_book_id():
     # Get Author by Author ID
@@ -26,12 +33,18 @@ def test_get_cover_photo_by_book_id():
     response = m.get_cover_photo_by_book_id()
     assert response.status_code == 200
 
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'cover_photo.json')
+
 
 def test_get_cover_photo_id():
     # Get Author by Author ID
     # API can respond only user ID from 1 to 10
     response = m.get_cover_photo_by_id()
     assert response.status_code == 200
+
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'cover_photo.json')
 
 
 def test_update_cover_photo_by_id(user: BaseClass):
@@ -44,13 +57,11 @@ def test_update_cover_photo_by_id(user: BaseClass):
     assert BaseClass.id != cover_photo_id_new
     BaseClass.id = response.json()["id"]
 
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'cover_photo.json')
+
 
 def test_delete_cover_photo_by_id():
-    # Delete existing activity
-    payload = m.cover_photo_payload()
-    response = m.delete_cover_photo(payload)
+    # Delete existing cover photo
+    response = m.delete_cover_photo()
     assert response.status_code == 200
-    cover_photo_id_new = response.json()["id"]
-
-    assert BaseClass.id != cover_photo_id_new
-    BaseClass.id = response.json()["id"]

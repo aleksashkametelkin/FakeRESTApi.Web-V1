@@ -17,7 +17,7 @@ def test_get_list_of_books():
 
 
 def test_create_book(user: Book):
-    # Create POST response to create new User
+    # Create POST response to create new Book
     payload = m.book_payload()
     response = m.create_book(payload)
     assert response.status_code == 200
@@ -59,6 +59,9 @@ def test_update_book_by_id(user: Book):
     assert Book.id != book_id_new
     assert Book.pageCount != page_count_new
     Book.id = response.json()["id"]
+
+    j = json.loads(response.content)
+    assert_valid_schema(j, 'book.json')
 
 
 def test_delete_book():

@@ -1,5 +1,3 @@
-import datetime
-from datetime import datetime
 import random
 
 import requests
@@ -15,16 +13,16 @@ def get_list_of_activities():
     return requests.get(TEST_URL + f"/api/v1/Activities")
 
 
-def create_activity(activity_id):
-    return requests.post(TEST_URL + f"/api/v1/Activities", json=activity_id)
+def create_activity(activity):
+    return requests.post(TEST_URL + f"/api/v1/Activities", json=activity)
 
 
 def get_activity():
     return requests.get(TEST_URL + f"/api/v1/Activities/{BaseClass.id}")
 
 
-def update_activity(activity_id):
-    return requests.put(TEST_URL + f"/api/v1/Activities/{BaseClass.id}", json=activity_id)
+def update_activity(activity):
+    return requests.put(TEST_URL + f"/api/v1/Activities/{BaseClass.id}", json=activity)
 
 
 def delete_activity():
@@ -99,17 +97,15 @@ def delete_book():
 
 
 def book_payload():
-    # date_now = datetime.date.today()
-    # time_now = datetime.time.
     book_id = random.randrange(1, 10)
-    page_count = random.randrange(100, 2000)
+    page_count = random.randrange(100, 200)
 
     return {
         "id": book_id,
         "title": f"{f.name()}",
         "description": f"{f.job()}",
         "pageCount": page_count,
-        "excerpt": "string",
+        "excerpt": "strttrtdgd",
         "publishDate": "2023-04-05T22:44:04.097Z"
     }
 
@@ -135,16 +131,17 @@ def update_cover_photo(cover_photo):
     return requests.put(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}", json=cover_photo)
 
 
-def delete_cover_photo(cover_photo):
-    return requests.put(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}", json=cover_photo)
+def delete_cover_photo():
+    return requests.delete(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}")
 
 
 def cover_photo_payload():
     cover_photo_id = random.randrange(1, 10)
+    book_id = random.randrange(1, 200)
     return {
         "id": cover_photo_id,
-        "idBook": Book.id,
-        "url": "string"
+        "idBook": book_id,
+        "url": f"{f.url()}"
     }
 
 
@@ -153,16 +150,16 @@ def get_list_of_users():
     return requests.get(TEST_URL + f"/api/v1/Users")
 
 
-def create_user(user_id):
-    return requests.post(TEST_URL + f"/api/v1/Users", json=user_id)
+def create_user(user):
+    return requests.post(TEST_URL + f"/api/v1/Users", json=user)
 
 
 def get_user_by_id():
     return requests.get(TEST_URL + f"/api/v1/Users/{BaseClass.id}")
 
 
-def update_user(user_id):
-    return requests.put(TEST_URL + f"/api/v1/Users/{BaseClass.id}", json=user_id)
+def update_user(user):
+    return requests.put(TEST_URL + f"/api/v1/Users/{BaseClass.id}", json=user)
 
 
 def delete_user():

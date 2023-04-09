@@ -28,14 +28,14 @@ def test_create_author(user: BaseClass):
     assert_valid_schema(j, 'author.json')
 
 
-def test_get_book_by_author_id():
+def test_get_author_by_book_id():
     # Get Author by Author ID
     # API can respond only user ID from 1 to 10
     response = m.get_book_of_author()
     assert response.status_code == 200
 
     j = json.loads(response.content)
-    assert_valid_schema(j, 'book.json')
+    assert_valid_schema(j, 'get_author_by_book_id.json')
 
 
 def test_get_author_id():
@@ -51,9 +51,10 @@ def test_get_author_id():
 def test_update_author_by_id(user: BaseClass):
     # Update Author's params
     author_id = random.randrange(1, 200)
+    book_id = random.randrange(1, 20)
     payload = {
         "id": author_id,
-        "idBook": user.idBook,
+        "idBook": book_id,
         "firstName": f"{user.firstName}",
         "lastName": f"{user.lastName}"
     }
