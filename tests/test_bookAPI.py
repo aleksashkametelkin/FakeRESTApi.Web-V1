@@ -1,7 +1,7 @@
 import json
 import random
 import main as m
-from utils.models import Book
+from conftest import BaseModel
 
 from tests.support.assertions import assert_valid_schema
 
@@ -16,14 +16,14 @@ def test_get_list_of_books():
     assert_valid_schema(j, 'get_list_of_books.json')
 
 
-def test_create_book(user: Book):
+def test_create_book(book: BaseModel):
     # Create POST response to create new Book
     payload = m.book_payload()
     response = m.create_book(payload)
     assert response.status_code == 200
 
-    Book.id = response.json()["id"]
-    Book.pageCount = response.json()["pageCount"]
+    BaseModel.id = response.json()["id"]
+    BaseModel.pageCount = response.json()["pageCount"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'book.json')
@@ -39,7 +39,7 @@ def test_get_book_by_id():
     assert_valid_schema(j, 'book.json')
 
 
-def test_update_book_by_id(user: Book):
+def test_update_book_by_id(book: BaseModel):
     # Update Book params
     book_id = random.randrange(100, 1000)
     page_count = random.randrange(1000, 10000)
@@ -56,9 +56,9 @@ def test_update_book_by_id(user: Book):
     book_id_new = response.json()["id"]
     page_count_new = response.json()["pageCount"]
 
-    assert Book.id != book_id_new
-    assert Book.pageCount != page_count_new
-    Book.id = response.json()["id"]
+    assert BaseModel.id != book_id_new
+    assert BaseModel.pageCount != page_count_new
+    BaseModel.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'book.json')

@@ -1,10 +1,13 @@
 import json
 import random
 
+from faker import Faker
+
 import main as m
 from tests.support.assertions import assert_valid_schema
-from utils.models import BaseClass
+from conftest import BaseModel
 
+f = Faker()
 URL = m.TEST_URL
 
 
@@ -16,13 +19,13 @@ def test_get_list_of_authors():
     assert_valid_schema(j, 'get_list_of_authors.json')
 
 
-def test_create_author(user: BaseClass):
+def test_create_author(user: BaseModel):
     # Create POST response to create new User
     payload = m.author_payload()
     response = m.create_author(payload)
     assert response.status_code == 200
 
-    BaseClass.id = response.json()["id"]
+    BaseModel.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'author.json')
@@ -48,22 +51,22 @@ def test_get_author_id():
     assert_valid_schema(j, 'author.json')
 
 
-def test_update_author_by_id(user: BaseClass):
+def test_update_author_by_id(user: BaseModel):
     # Update Author's params
     author_id = random.randrange(1, 200)
     book_id = random.randrange(1, 20)
     payload = {
         "id": author_id,
         "idBook": book_id,
-        "firstName": f"{user.firstName}",
-        "lastName": f"{user.lastName}"
+        "firstName": f"{f.first_name()}",
+        "lastName": f"{f.last_name()}"
     }
     response = m.update_author(payload)
     assert response.status_code == 200
     author_id_new = response.json()["id"]
 
-    assert BaseClass.id != author_id_new
-    BaseClass.id = response.json()["id"]
+    assert BaseModel.id != author_id_new
+    BaseModel.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'author.json')

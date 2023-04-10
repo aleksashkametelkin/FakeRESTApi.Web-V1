@@ -1,7 +1,12 @@
 import pytest
-from .utils.models import BaseClass
+from pydantic import BaseModel
 
 
 @pytest.fixture
 def user():
-    return BaseClass()
+    return BaseModel()
+
+
+@pytest.fixture
+def book():
+    return BaseModel()

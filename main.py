@@ -2,8 +2,7 @@ import random
 
 import requests
 from faker import Faker
-from utils.models import BaseClass, Book
-
+from conftest import BaseModel
 f = Faker()
 TEST_URL = "https://fakerestapi.azurewebsites.net"
 
@@ -18,15 +17,15 @@ def create_activity(activity):
 
 
 def get_activity():
-    return requests.get(TEST_URL + f"/api/v1/Activities/{BaseClass.id}")
+    return requests.get(TEST_URL + f"/api/v1/Activities/{BaseModel.id}")
 
 
 def update_activity(activity):
-    return requests.put(TEST_URL + f"/api/v1/Activities/{BaseClass.id}", json=activity)
+    return requests.put(TEST_URL + f"/api/v1/Activities/{BaseModel.id}", json=activity)
 
 
 def delete_activity():
-    return requests.delete(TEST_URL + f"/api/v1/Activities/{BaseClass.id}")
+    return requests.delete(TEST_URL + f"/api/v1/Activities/{BaseModel.id}")
 
 
 def activity_payload():
@@ -49,19 +48,19 @@ def create_author(author):
 
 
 def get_book_of_author():
-    return requests.get(TEST_URL + f"/api/v1/Authors/authors/books/{BaseClass.id}")
+    return requests.get(TEST_URL + f"/api/v1/Authors/authors/books/{BaseModel.id}")
 
 
 def get_author_by_id():
-    return requests.get(TEST_URL + f"/api/v1/Authors/{BaseClass.id}")
+    return requests.get(TEST_URL + f"/api/v1/Authors/{BaseModel.id}")
 
 
 def update_author(author):
-    return requests.put(TEST_URL + f"/api/v1/Authors/{BaseClass.id}", json=author)
+    return requests.put(TEST_URL + f"/api/v1/Authors/{BaseModel.id}", json=author)
 
 
 def delete_author():
-    return requests.delete(TEST_URL + f"/api/v1/Authors/{BaseClass.id}")
+    return requests.delete(TEST_URL + f"/api/v1/Authors/{BaseModel.id}")
 
 
 def author_payload():
@@ -85,15 +84,15 @@ def create_book(activity):
 
 
 def get_book_by_id():
-    return requests.get(TEST_URL + f"/api/v1/Books/{Book.id}")
+    return requests.get(TEST_URL + f"/api/v1/Books/{BaseModel.id}")
 
 
 def update_book(activity):
-    return requests.put(TEST_URL + f"/api/v1/Books/{Book.id}", json=activity)
+    return requests.put(TEST_URL + f"/api/v1/Books/{BaseModel.id}", json=activity)
 
 
 def delete_book():
-    return requests.delete(TEST_URL + f"/api/v1/Books/{Book.id}")
+    return requests.delete(TEST_URL + f"/api/v1/Books/{BaseModel.id}")
 
 
 def book_payload():
@@ -120,19 +119,19 @@ def create_cover_photo(cover_photo):
 
 
 def get_cover_photo_by_book_id():
-    return requests.get(TEST_URL + f"/api/v1/CoverPhotos/books/covers/{Book.id}")
+    return requests.get(TEST_URL + f"/api/v1/CoverPhotos/books/covers/{BaseModel.id}")
 
 
 def get_cover_photo_by_id():
-    return requests.get(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}")
+    return requests.get(TEST_URL + f"/api/v1/CoverPhotos/{BaseModel.id}")
 
 
 def update_cover_photo(cover_photo):
-    return requests.put(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}", json=cover_photo)
+    return requests.put(TEST_URL + f"/api/v1/CoverPhotos/{BaseModel.id}", json=cover_photo)
 
 
 def delete_cover_photo():
-    return requests.delete(TEST_URL + f"/api/v1/CoverPhotos/{BaseClass.id}")
+    return requests.delete(TEST_URL + f"/api/v1/CoverPhotos/{BaseModel.id}")
 
 
 def cover_photo_payload():
@@ -155,15 +154,15 @@ def create_user(user):
 
 
 def get_user_by_id():
-    return requests.get(TEST_URL + f"/api/v1/Users/{BaseClass.id}")
+    return requests.get(TEST_URL + f"/api/v1/Users/{BaseModel.id}")
 
 
 def update_user(user):
-    return requests.put(TEST_URL + f"/api/v1/Users/{BaseClass.id}", json=user)
+    return requests.put(TEST_URL + f"/api/v1/Users/{BaseModel.id}", json=user)
 
 
 def delete_user():
-    return requests.delete(TEST_URL + f"/api/v1/Users/{BaseClass.id}")
+    return requests.delete(TEST_URL + f"/api/v1/Users/{BaseModel.id}")
 
 
 def user_payload():
