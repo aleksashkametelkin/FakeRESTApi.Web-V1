@@ -1,26 +1,5 @@
 import pytest
-from pydantic import BaseModel
-
-
-class User:
-    id: int
-
-
-class Book:
-    id: int
-    pageCount: int
-
-
-class CoverPhoto:
-    id: int
-
-
-class Author:
-    id: int
-
-
-class Activity:
-    id: int
+from tests.support.validate import User, Book
 
 
 @pytest.fixture

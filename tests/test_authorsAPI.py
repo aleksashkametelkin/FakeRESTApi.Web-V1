@@ -5,7 +5,7 @@ from faker import Faker
 
 import main as m
 from tests.support.assertions import assert_valid_schema
-from conftest import Author
+from tests.support.validate import Author
 
 f = Faker()
 URL = m.TEST_URL

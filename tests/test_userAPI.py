@@ -1,7 +1,7 @@
 import main as m
 import random
 import json
-from conftest import User
+from tests.support.validate import User
 
 from faker import Faker
 from tests.support.assertions import assert_valid_schema

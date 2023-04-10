@@ -1,7 +1,7 @@
 import json
 import random
 import main as m
-from conftest import CoverPhoto
+from tests.support.validate import CoverPhoto
 
 from faker import Faker
 

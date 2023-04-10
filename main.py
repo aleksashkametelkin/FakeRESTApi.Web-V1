@@ -2,7 +2,7 @@ import random
 
 import requests
 from faker import Faker
-from conftest import User, Book, CoverPhoto, Author, Activity
+from tests.support.validate import User, Book, CoverPhoto, Author, Activity
 
 f = Faker()
 TEST_URL = "https://fakerestapi.azurewebsites.net"

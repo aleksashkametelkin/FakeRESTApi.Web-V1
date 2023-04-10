@@ -1,7 +1,7 @@
 import json
 import random
 import main as m
-from conftest import Book
+from tests.support.validate import Book
 
 from tests.support.assertions import assert_valid_schema
 
