@@ -30,4 +30,4 @@ def user():
 
 @pytest.fixture
 def book():
-    return BaseModel()
+    return Book()
