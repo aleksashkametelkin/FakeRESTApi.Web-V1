@@ -1,7 +1,7 @@
 import json
 import random
 import main as m
-from conftest import BaseModel
+from conftest import Activity
 
 from tests.support.assertions import assert_valid_schema
 
@@ -16,13 +16,13 @@ def test_get_list_of_activities():
     assert_valid_schema(j, 'get_list_of_activities.json')
 
 
-def test_create_activity(user: BaseModel):
+def test_create_activity(user: Activity):
     # Create POST response to create new Activity
     payload = m.activity_payload()
     response = m.create_activity(payload)
     assert response.status_code == 200
 
-    BaseModel.id = response.json()["id"]
+    Activity.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'activity.json')
@@ -38,7 +38,7 @@ def test_get_activity_id():
     assert_valid_schema(j, 'activity.json')
 
 
-def test_update_activity_by_id(user: BaseModel):
+def test_update_activity_by_id(user: Activity):
     # Update Activity's params
     activity_id = random.randrange(100, 1000)
     payload = {
@@ -51,8 +51,8 @@ def test_update_activity_by_id(user: BaseModel):
     assert response.status_code == 200
     activiti_id_new = response.json()["id"]
 
-    assert BaseModel.id != activiti_id_new
-    BaseModel.id = response.json()["id"]
+    assert Activity.id != activiti_id_new
+    Activity.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'activity.json')

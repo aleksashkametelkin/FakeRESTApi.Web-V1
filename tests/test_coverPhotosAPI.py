@@ -1,7 +1,7 @@
 import json
 import random
 import main as m
-from conftest import BaseModel
+from conftest import CoverPhoto
 
 from faker import Faker
 
@@ -19,13 +19,13 @@ def test_get_list_of_cover_photos():
     assert_valid_schema(j, 'get_list_of_cover_photos.json')
 
 
-def test_create_cover_photo(user: BaseModel):
+def test_create_cover_photo(user: CoverPhoto):
     # Create POST response to create new User
     payload = m.cover_photo_payload()
     response = m.create_cover_photo(payload)
     assert response.status_code == 200
 
-    BaseModel.id = response.json()["id"]
+    CoverPhoto.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'cover_photo.json')
@@ -51,7 +51,7 @@ def test_get_cover_photo_by_id():
     assert_valid_schema(j, 'cover_photo.json')
 
 
-def test_update_cover_photo_by_id(user: BaseModel):
+def test_update_cover_photo_by_id(user: CoverPhoto):
     # Update Cover photo params
     cover_photo_id = random.randrange(11, 1000)
     book_id = random.randrange(1, 200)
@@ -64,8 +64,8 @@ def test_update_cover_photo_by_id(user: BaseModel):
     assert response.status_code == 200
     cover_photo_id_new = response.json()["id"]
 
-    assert BaseModel.id != cover_photo_id_new
-    BaseModel.id = response.json()["id"]
+    assert CoverPhoto.id != cover_photo_id_new
+    CoverPhoto.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'cover_photo.json')

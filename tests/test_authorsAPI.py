@@ -5,7 +5,7 @@ from faker import Faker
 
 import main as m
 from tests.support.assertions import assert_valid_schema
-from conftest import BaseModel
+from conftest import Author
 
 f = Faker()
 URL = m.TEST_URL
@@ -19,13 +19,13 @@ def test_get_list_of_authors():
     assert_valid_schema(j, 'get_list_of_authors.json')
 
 
-def test_create_author(user: BaseModel):
+def test_create_author(user: Author):
     # Create POST response to create new User
     payload = m.author_payload()
     response = m.create_author(payload)
     assert response.status_code == 200
 
-    BaseModel.id = response.json()["id"]
+    Author.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'author.json')
@@ -51,7 +51,7 @@ def test_get_author_id():
     assert_valid_schema(j, 'author.json')
 
 
-def test_update_author_by_id(user: BaseModel):
+def test_update_author_by_id(user: Author):
     # Update Author's params
     author_id = random.randrange(1, 200)
     book_id = random.randrange(1, 20)
@@ -65,8 +65,8 @@ def test_update_author_by_id(user: BaseModel):
     assert response.status_code == 200
     author_id_new = response.json()["id"]
 
-    assert BaseModel.id != author_id_new
-    BaseModel.id = response.json()["id"]
+    assert Author.id != author_id_new
+    Author.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'author.json')

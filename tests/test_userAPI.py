@@ -1,7 +1,7 @@
 import main as m
 import random
 import json
-from conftest import BaseModel
+from conftest import User
 
 from faker import Faker
 from tests.support.assertions import assert_valid_schema
@@ -18,13 +18,13 @@ def test_get_list_of_users():
     assert_valid_schema(j, 'get_list_of_users.json')
 
 
-def test_create_user(user: BaseModel):
+def test_create_user(user: User):
     # Create POST response to create new User
     payload = m.user_payload()
     response = m.create_user(payload)
     assert response.status_code == 200
 
-    BaseModel.id = response.json()["id"]
+    User.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'user.json')
@@ -40,7 +40,7 @@ def test_get_user_by_id():
     assert_valid_schema(j, 'user.json')
 
 
-def test_update_user_by_id(user: BaseModel):
+def test_update_user_by_id(user):
     # Update User's params
     user_id = random.randrange(100, 1000)
     payload = {
@@ -52,8 +52,8 @@ def test_update_user_by_id(user: BaseModel):
     assert response.status_code == 200
     user_id_new = response.json()["id"]
 
-    assert BaseModel.id != user_id_new
-    BaseModel.id = response.json()["id"]
+    assert user.id != user_id_new
+    user.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'user.json')
