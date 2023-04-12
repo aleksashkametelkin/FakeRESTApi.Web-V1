@@ -52,8 +52,8 @@ def test_update_user_by_id(user):
     assert response.status_code == 200
     user_id_new = response.json()["id"]
 
-    assert user.id != user_id_new
-    user.id = response.json()["id"]
+    assert User.id != user_id_new
+    User.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'user.json')
