@@ -1,6 +1,3 @@
-from pydantic import BaseModel, validator
-
-
 class User:
     id: int
 
