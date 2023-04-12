@@ -33,9 +33,11 @@ def test_create_cover_photo(user: CoverPhoto):
 
 def test_get_cover_photo_by_book_id():
     # Get Cover photo by Book ID
-    Book.id = random.randrange(1, 20)
+    Book.id = random.randrange(10, 20)
     response = m.get_cover_photo_by_book_id()
     assert response.status_code == 200
+
+    # CoverPhoto.id = response.json()[0]["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'get_cover_photo_by_book_id.json')
