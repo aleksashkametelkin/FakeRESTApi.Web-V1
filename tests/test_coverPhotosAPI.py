@@ -1,7 +1,7 @@
 import json
 import random
 import main as m
-from tests.support.validate import CoverPhoto
+from tests.support.validate import CoverPhoto, Book
 
 from faker import Faker
 
@@ -32,8 +32,8 @@ def test_create_cover_photo(user: CoverPhoto):
 
 
 def test_get_cover_photo_by_book_id():
-    # Get Author by Author ID
-    # API can respond only user ID from 1 to 10
+    # Get Cover photo by Book ID
+    Book.id = random.randrange(1, 20)
     response = m.get_cover_photo_by_book_id()
     assert response.status_code == 200
 

@@ -137,7 +137,7 @@ def delete_cover_photo():
 
 def cover_photo_payload():
     cover_photo_id = random.randrange(1, 10)
-    book_id = random.randrange(1, 200)
+    book_id = random.randrange(1, 20)
     return {
         "id": cover_photo_id,
         "idBook": book_id,
