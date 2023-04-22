@@ -30,9 +30,8 @@ def delete_activity():
 
 
 def activity_payload():
-    activity_id = random.randrange(1, 10)
     return {
-        "id": activity_id,
+        "id": f"{random.randrange(1, 10)}",
         "title": f"{f.job()}",
         "dueDate": f"2023-04-07T16:22:19.253Z",
         "completed": True,
@@ -65,11 +64,9 @@ def delete_author():
 
 
 def author_payload():
-    author_id = random.randrange(1, 200)
-    book_id = random.randrange(1, 200)
     return {
-        "id": author_id,
-        "idBook": book_id,
+        "id": f"{random.randrange(1, 200)}",
+        "idBook": f"{random.randrange(1, 200)}",
         "firstName": f"{f.first_name()}",
         "lastName": f"{f.last_name()}"
     }
@@ -97,14 +94,11 @@ def delete_book():
 
 
 def book_payload():
-    book_id = random.randrange(1, 10)
-    page_count = random.randrange(100, 200)
-
     return {
-        "id": book_id,
+        "id": f"{random.randrange(1, 10)}",
         "title": f"{f.name()}",
         "description": f"{f.job()}",
-        "pageCount": page_count,
+        "pageCount": f"{random.randrange(100, 200)}",
         "excerpt": "strttrtdgd",
         "publishDate": "2023-04-05T22:44:04.097Z"
     }
@@ -136,11 +130,9 @@ def delete_cover_photo():
 
 
 def cover_photo_payload():
-    cover_photo_id = random.randrange(1, 10)
-    book_id = random.randrange(1, 20)
     return {
-        "id": cover_photo_id,
-        "idBook": book_id,
+        "id": f"{random.randrange(1, 10)}",
+        "idBook": f"{random.randrange(1, 20)}",
         "url": f"{f.url()}"
     }
 
@@ -168,9 +160,8 @@ def delete_user():
 
 def user_payload():
     # API can respond only Integer user ID: from 1 to 10
-    user_id = random.randrange(1, 10)
     return {
-        "id": user_id,
+        "id": f"{random.randrange(1, 10)}",
         "userName": f"{f.name()}",
         "password": f"{f.password()}"
     }
