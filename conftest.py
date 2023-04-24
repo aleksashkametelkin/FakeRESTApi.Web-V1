@@ -4,12 +4,12 @@ from tests.support.validate import User, Book
 
 
 @pytest.fixture
-def user(scope="session"):
+def user(http_session):
     return User()
 
 
 @pytest.fixture
-def book(scope="session"):
+def book(http_session):
     return Book()
 
 
