@@ -9,7 +9,7 @@ def user(scope="session"):
 
 
 @pytest.fixture
-def book():
+def book(scope="session"):
     return Book()
 
 

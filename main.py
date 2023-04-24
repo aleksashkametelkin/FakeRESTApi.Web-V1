@@ -150,8 +150,8 @@ def get_user_by_id():
     return requests.get(TEST_URL + f"/api/v1/Users/{User.id}")
 
 
-def update_user(user):
-    return requests.put(TEST_URL + f"/api/v1/Users/{User.id}", json=user)
+def update_user(payload):
+    return requests.put(TEST_URL + f"/api/v1/Users/{User.id}", json=payload)
 
 
 def delete_user():
