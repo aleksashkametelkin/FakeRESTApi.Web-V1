@@ -17,5 +17,3 @@ class Author:
 
 class Activity:
     id: int
-
-

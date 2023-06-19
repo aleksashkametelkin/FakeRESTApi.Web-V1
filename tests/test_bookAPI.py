@@ -67,3 +67,6 @@ def test_update_book_by_id():
 def test_delete_book():
     response = m.delete_book()
     assert response.status_code == 200
+
+    response = m.get_book_by_id()
+    assert response.status_code == 404
