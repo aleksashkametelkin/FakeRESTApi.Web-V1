@@ -2,10 +2,7 @@ import pytest
 import requests
 
 
-@pytest.fixture
-def http_session(scope="session"):
-    with requests.Session() as s:
-        s.headers.update({"Content-Type": "application/json"})
-        s.headers.update({"X-Test": "true"})
-        yield s
-        
+@pytest.fixture(scope="session")
+def http_session():
+    requests.Session().headers.update({"Content-Type": "application/json"})
+    requests.Session().headers.update({"Alex-Auto-Tests": "true"})
