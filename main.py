@@ -95,7 +95,7 @@ def delete_book():
 
 def book_payload():
     return {
-        "id": f"{random.randrange(1, 10)}",
+        "id": f"{random.randrange(1, 12)}",
         "title": f"{f.name()}",
         "description": f"{f.job()}",
         "pageCount": f"{random.randrange(100, 200)}",

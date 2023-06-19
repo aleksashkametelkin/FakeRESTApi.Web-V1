@@ -11,7 +11,7 @@ f = Faker()
 URL = m.TEST_URL
 
 
-def test_get_list_of_cover_photos():
+def test_get_list_of_cover_photos(http_session):
     response = m.get_list_of_cover_photos()
     assert response.status_code == 200
 
@@ -19,7 +19,7 @@ def test_get_list_of_cover_photos():
     assert_valid_schema(j, 'get_list_of_cover_photos.json')
 
 
-def test_create_cover_photo(user: CoverPhoto):
+def test_create_cover_photo(http_session):
     # Create POST response to create new User
     payload = m.cover_photo_payload()
     response = m.create_cover_photo(payload)
@@ -31,7 +31,7 @@ def test_create_cover_photo(user: CoverPhoto):
     assert_valid_schema(j, 'cover_photo.json')
 
 
-def test_get_cover_photo_by_book_id():
+def test_get_cover_photo_by_book_id(http_session):
     # Get Cover photo by Book ID
     Book.id = random.randrange(10, 20)
     response = m.get_cover_photo_by_book_id()
@@ -43,7 +43,7 @@ def test_get_cover_photo_by_book_id():
     assert_valid_schema(j, 'get_cover_photo_by_book_id.json')
 
 
-def test_get_cover_photo_by_id():
+def test_get_cover_photo_by_id(http_session):
     # Get Author by Author ID
     # API can respond only user ID from 1 to 10
     response = m.get_cover_photo_by_id()
@@ -53,7 +53,7 @@ def test_get_cover_photo_by_id():
     assert_valid_schema(j, 'cover_photo.json')
 
 
-def test_update_cover_photo_by_id(user: CoverPhoto):
+def test_update_cover_photo_by_id(http_session):
     # Update Cover photo params
     cover_photo_id = random.randrange(11, 1000)
     book_id = random.randrange(1, 200)
@@ -73,7 +73,7 @@ def test_update_cover_photo_by_id(user: CoverPhoto):
     assert_valid_schema(j, 'cover_photo.json')
 
 
-def test_delete_cover_photo_by_id():
+def test_delete_cover_photo_by_id(http_session):
     # Delete existing cover photo
     response = m.delete_cover_photo()
     assert response.status_code == 200
