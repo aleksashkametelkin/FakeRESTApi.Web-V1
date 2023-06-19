@@ -8,7 +8,7 @@ from tests.support.assertions import assert_valid_schema
 URL = m.TEST_URL
 
 
-def test_get_list_of_books(http_session):
+def test_get_list_of_books():
     response = m.get_list_of_books()
     assert response.status_code == 200
 
@@ -16,7 +16,7 @@ def test_get_list_of_books(http_session):
     assert_valid_schema(j, 'get_list_of_books.json')
 
 
-def test_create_book(http_session):
+def test_create_book():
     # Create POST response to create new Book
     payload = m.book_payload()
     response = m.create_book(payload)
@@ -29,7 +29,7 @@ def test_create_book(http_session):
     assert_valid_schema(j, 'book.json')
 
 
-def test_get_book_by_id(http_session):
+def test_get_book_by_id():
     # Get User by User ID
     # API can respond only user ID from 1 to 10
     response = m.get_book_by_id()
@@ -39,7 +39,7 @@ def test_get_book_by_id(http_session):
     assert_valid_schema(j, 'book.json')
 
 
-def test_update_book_by_id(http_session):
+def test_update_book_by_id():
     # Update Book params
     book_id = random.randrange(100, 1000)
     page_count = random.randrange(1000, 10000)
@@ -64,6 +64,6 @@ def test_update_book_by_id(http_session):
     assert_valid_schema(j, 'book.json')
 
 
-def test_delete_book(http_session):
+def test_delete_book():
     response = m.delete_book()
     assert response.status_code == 200

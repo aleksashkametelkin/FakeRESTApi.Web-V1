@@ -8,7 +8,7 @@ from tests.support.assertions import assert_valid_schema
 URL = m.TEST_URL
 
 
-def test_get_list_of_activities(http_session):
+def test_get_list_of_activities():
     response = m.get_list_of_activities()
     assert response.status_code == 200
 
@@ -16,7 +16,7 @@ def test_get_list_of_activities(http_session):
     assert_valid_schema(j, 'get_list_of_activities.json')
 
 
-def test_create_activity(http_session):
+def test_create_activity():
     # Create POST response to create new Activity
     payload = m.activity_payload()
     response = m.create_activity(payload)
@@ -28,7 +28,7 @@ def test_create_activity(http_session):
     assert_valid_schema(j, 'activity.json')
 
 
-def test_get_activity_id(http_session):
+def test_get_activity_id():
     # Get Activity by ID
     # API can respond only Activity ID from 1 to 10
     response = m.get_activity()
@@ -38,7 +38,7 @@ def test_get_activity_id(http_session):
     assert_valid_schema(j, 'activity.json')
 
 
-def test_update_activity_by_id(http_session):
+def test_update_activity_by_id():
     # Update Activity's params
     activity_id = random.randrange(100, 1000)
     payload = {
@@ -58,7 +58,7 @@ def test_update_activity_by_id(http_session):
     assert_valid_schema(j, 'activity.json')
 
 
-def test_delete_activity_by_id(http_session):
+def test_delete_activity_by_id():
     # Delete existing activity
     response = m.delete_activity()
     assert response.status_code == 200
