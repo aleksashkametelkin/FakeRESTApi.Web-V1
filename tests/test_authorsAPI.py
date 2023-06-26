@@ -5,7 +5,7 @@ from faker import Faker
 
 import main as m
 from tests.support.assertions import assert_valid_schema
-from tests.support.validate import Author
+from tests.support.validate import Author, AuthorArray
 
 f = Faker()
 URL = m.TEST_URL
@@ -30,15 +30,19 @@ def test_create_author():
     j = json.loads(response.content)
     assert_valid_schema(j, 'author.json')
 
+    Author.parse_obj(response.json())
+
 
 def test_get_author_by_book_id():
-    # Get Author by Author ID
+    # Get Author by Book ID
     # API can respond only user ID from 1 to 10
     response = m.get_book_of_author()
     assert response.status_code == 200
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'get_author_by_book_id.json')
+
+    AuthorArray.parse_obj(response.json())
 
 
 def test_get_author_id():
@@ -49,6 +53,8 @@ def test_get_author_id():
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'author.json')
+
+    Author.parse_obj(response.json())
 
 
 def test_update_author_by_id():
@@ -70,6 +76,8 @@ def test_update_author_by_id():
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'author.json')
+
+    Author.parse_obj(response.json())
 
 
 def test_delete_author_by_id():

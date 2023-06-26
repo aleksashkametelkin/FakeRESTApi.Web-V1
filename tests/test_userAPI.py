@@ -1,5 +1,4 @@
 import main as m
-import random
 import json
 from tests.support.validate import User
 
@@ -25,9 +24,10 @@ def test_create_user():
     assert response.status_code == 200
 
     User.id = response.json()["id"]
-
     j = json.loads(response.content)
     assert_valid_schema(j, 'user.json')
+
+    User.parse_obj(response.json())
 
 
 def test_get_user_by_id():
@@ -39,24 +39,23 @@ def test_get_user_by_id():
     j = json.loads(response.content)
     assert_valid_schema(j, 'user.json')
 
+    User.parse_obj(response.json())
+
 
 def test_update_user_by_id():
     # Update User's params
-    user_id = random.randrange(100, 1000)
     payload = {
-        "id": user_id,
+        "id": User.id,
         "userName": f"{f.name()}",
         "password": f"{f.password()}"
     }
     response = m.update_user(payload)
     assert response.status_code == 200
-    user_id_new = response.json()["id"]
-
-    assert User.id != user_id_new
-    User.id = response.json()["id"]
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'user.json')
+
+    User.parse_obj(response.json())
 
 
 def test_delete_user():

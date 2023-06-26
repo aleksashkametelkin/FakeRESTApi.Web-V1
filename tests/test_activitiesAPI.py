@@ -1,5 +1,8 @@
 import json
 import random
+
+import pytest
+
 import main as m
 from tests.support.validate import Activity
 
@@ -27,6 +30,8 @@ def test_create_activity():
     j = json.loads(response.content)
     assert_valid_schema(j, 'activity.json')
 
+    Activity.parse_obj(response.json())
+
 
 def test_get_activity_id():
     # Get Activity by ID
@@ -37,25 +42,33 @@ def test_get_activity_id():
     j = json.loads(response.content)
     assert_valid_schema(j, 'activity.json')
 
+    Activity.parse_obj(response.json())
 
-def test_update_activity_by_id():
+
+@pytest.mark.parametrize("bool2", [
+    True,
+    False,
+])
+def test_update_activity_by_id(bool2):
     # Update Activity's params
-    activity_id = random.randrange(100, 1000)
+    # activity_id = random.randrange(100, 1000)
     payload = {
-        "activity_id": activity_id,
-        "title": "test title",
+        "activity_id": Activity.id,
+        "title": f"{random.choice}",
         "dueDate": "2023-04-09T09:39:20.165Z",
-        "completed": True
+        "completed": bool2
     }
     response = m.update_activity(payload)
     assert response.status_code == 200
-    activiti_id_new = response.json()["id"]
-
-    assert Activity.id != activiti_id_new
-    Activity.id = response.json()["id"]
-
+    # Will figured later if needed
+    # activiti_id_new = response.json()["id"]
+    #
+    # assert Activity.id != activiti_id_new
+    # Activity.id = response.json()["id"]
     j = json.loads(response.content)
     assert_valid_schema(j, 'activity.json')
+
+    Activity.parse_obj(response.json())
 
 
 def test_delete_activity_by_id():

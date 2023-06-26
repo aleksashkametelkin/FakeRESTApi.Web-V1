@@ -1,7 +1,7 @@
 import json
 import random
 import main as m
-from tests.support.validate import CoverPhoto, Book
+from tests.support.validate import CoverPhoto, Book, CoverPhotoArray
 
 from faker import Faker
 
@@ -30,6 +30,8 @@ def test_create_cover_photo():
     j = json.loads(response.content)
     assert_valid_schema(j, 'cover_photo.json')
 
+    CoverPhoto.parse_obj(response.json())
+
 
 def test_get_cover_photo_by_book_id():
     # Get Cover photo by Book ID
@@ -42,6 +44,8 @@ def test_get_cover_photo_by_book_id():
     j = json.loads(response.content)
     assert_valid_schema(j, 'get_cover_photo_by_book_id.json')
 
+    CoverPhotoArray.parse_obj(response.json())
+
 
 def test_get_cover_photo_by_id():
     # Get Author by Author ID
@@ -51,6 +55,8 @@ def test_get_cover_photo_by_id():
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'cover_photo.json')
+
+    CoverPhoto.parse_obj(response.json())
 
 
 def test_update_cover_photo_by_id():
@@ -71,6 +77,8 @@ def test_update_cover_photo_by_id():
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'cover_photo.json')
+
+    CoverPhoto.parse_obj(response.json())
 
 
 def test_delete_cover_photo_by_id():

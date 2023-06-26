@@ -28,6 +28,8 @@ def test_create_book():
     j = json.loads(response.content)
     assert_valid_schema(j, 'book.json')
 
+    Book.parse_obj(response.json())
+
 
 def test_get_book_by_id():
     # Get User by User ID
@@ -37,6 +39,8 @@ def test_get_book_by_id():
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'book.json')
+
+    Book.parse_obj(response.json())
 
 
 def test_update_book_by_id():
@@ -62,6 +66,8 @@ def test_update_book_by_id():
 
     j = json.loads(response.content)
     assert_valid_schema(j, 'book.json')
+
+    Book.parse_obj(response.json())
 
 
 def test_delete_book():

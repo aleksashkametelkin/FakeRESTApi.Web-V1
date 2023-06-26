@@ -1,4 +1,4 @@
-# imgur
+# For CI / CD
 Python + Pytest + TelegramBot report
 
 For example, use ```$ pytest ./tests --telegram_id=CHANNEL_ID --telegram_token=TELEGRAM:TOKEN --telegram_custom_text="Test text"```
@@ -15,5 +15,4 @@ Add this to .bash_profile
 PATH="path_to_your_allure_directory"/allure-2.10.0/bin:${PATH}"
 export PATH
 ````
-+
 run command "allure serve NAME_OF_CREATED_DIRECTORY" to see beauty HTML report
